@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                   <div class="post-main">
                     ${p.thumb ? `
                       <div class="post-thumb">
-                        <img src="${UI.esc("/" + String(p.thumb).replace(/^\/+/, ""))}" alt="" loading="lazy">
+                        <img src="${UI.esc(new URL(String(p.thumb).replace(/^\/+/, ""), document.baseURI))}" alt="" loading="lazy">
                       </div>
                     ` : ""}
 

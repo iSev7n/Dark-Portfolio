@@ -20,7 +20,7 @@
     async getPosts() {
       if (CACHE.posts) return CACHE.posts;
 
-      const res = await fetch("/content/posts.json");
+      const res = await fetch(new URL("content/posts.json", document.baseURI));
       if (!res.ok) {
         throw new Error("Failed to load posts.json");
       }
