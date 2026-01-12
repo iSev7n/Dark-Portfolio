@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script>
+    (function () {
+      const t = localStorage.getItem("theme") || "dark";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+  <title>Work | Portfolio</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/base.css">
+</head>
+<body>
+  <div id="topbar"></div>
+  <div class="container">
+    <div id="hero"></div>
+    <div id="app"></div>
+  </div>
+
+  <script src="js/ui.js"></script>
+  <script src="js/icons.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/markdown.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/layout.js"></script>
+
+  <script>
+    renderTopbar();
+    renderHero("work");
+  </script>
+  <script src="js/pages/work.js"></script>
+</body>
+</html>

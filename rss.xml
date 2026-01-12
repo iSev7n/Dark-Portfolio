@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Thomas Davis – Writing &amp; Technical Notes</title>
+    <link>https://thomasdavis.dev/posts.html</link>
+    <atom:link href="https://thomasdavis.dev/rss.xml" rel="self" type="application/rss+xml" />
+    <description><![CDATA[
+Essays and technical writing on software architecture, UI systems,
+leadership, and modern professional life.
+]]></description>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 14 Feb 2025 00:00:00 GMT</lastBuildDate>
+    <ttl>60</ttl>
+    <generator>ThomasDavis.dev</generator>
+
+    <item>
+      <title>Active Duty Army in 2025: The Reality Behind the Uniform</title>
+      <link>https://thomasdavis.dev/post.html?slug=active-duty-army-in-2025</link>
+      <guid isPermaLink="true">https://thomasdavis.dev/post.html?slug=active-duty-army-in-2025</guid>
+      <pubDate>Fri, 14 Feb 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[
+An honest look at what Active Duty Army life feels like in 2025 — the pace,
+the pressure, the administrative load, and the growing gap between effort
+and purpose.
+]]></description>
+    </item>
+
+    <item>
+      <title>Leadership vs Management: Why the Difference Matters More Than Ever</title>
+      <link>https://thomasdavis.dev/post.html?slug=leadership-vs-management</link>
+      <guid isPermaLink="true">https://thomasdavis.dev/post.html?slug=leadership-vs-management</guid>
+      <pubDate>Tue, 18 Feb 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[
+A clear distinction between leadership and management, why confusing the two
+damages teams, and how strong leaders balance structure with trust.
+]]></description>
+    </item>
+
+    <item>
+      <title>Burnout vs Discipline: Why Consistency Beats Intensity</title>
+      <link>https://thomasdavis.dev/post.html?slug=burnout-vs-discipline</link>
+      <guid isPermaLink="true">https://thomasdavis.dev/post.html?slug=burnout-vs-discipline</guid>
+      <pubDate>Thu, 20 Feb 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[
+Why sustainable discipline outperforms short bursts of motivation, and how
+professionals quietly burn out when consistency is replaced by intensity.
+]]></description>
+    </item>
+
+    <item>
+      <title>Building Clean UI Systems Without Frameworks</title>
+      <link>https://thomasdavis.dev/post.html?slug=clean-ui-without-frameworks</link>
+      <guid isPermaLink="true">https://thomasdavis.dev/post.html?slug=clean-ui-without-frameworks</guid>
+      <pubDate>Sat, 25 Jan 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[
+Lessons learned from building system-style UIs using native web technologies,
+focusing on predictability, state management, and long-term maintainability.
+]]></description>
+    </item>
+
+    <item>
+      <title>Building a Programming Language in JavaScript: Genesis Script v2</title>
+      <link>https://thomasdavis.dev/post.html?slug=genesis-script-v2</link>
+      <guid isPermaLink="true">https://thomasdavis.dev/post.html?slug=genesis-script-v2</guid>
+      <pubDate>Sat, 11 Jan 2025 00:00:00 GMT</pubDate>
+      <description><![CDATA[
+A deep dive into designing and implementing a beginner-friendly programming
+language with a tokenizer, parser, interpreter, transpiler, and CLI tooling.
+]]></description>
+    </item>
+
+  </channel>
+</rss>
