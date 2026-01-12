@@ -1,5 +1,13 @@
 # Static Portfolio (HTML / CSS / JavaScript)
 
+<p align="center">
+  <img
+    src="https://raw.githubusercontent.com/iSev7n/Dark-Portfolio/refs/heads/main/assets/projects/dark-portfolio.png"
+    alt="Dark Portfolio Preview"
+    width="800"
+  />
+</p>
+
 A fast, offline-capable personal portfolio built with **vanilla web technologies**.  
 No frameworks, no build step — designed for clarity, longevity, and control.
 
@@ -60,7 +68,9 @@ http://localhost:5173
 ├── posts.html
 ├── post.html
 ├── projects.html
+├── experience.html
 ├── music.html
+├── work.html
 ├── rss.xml
 │
 ├── css/
@@ -69,12 +79,16 @@ http://localhost:5173
 ├── js/
 │   ├── ui.js
 │   ├── data.js
+|   ├── icons.js
+|   ├── layout.js
 │   ├── markdown.js
 │   ├── config.js
 │   └── pages/
 │       ├── posts.js
 │       ├── post.js
 │       ├── projects.js
+|       ├── work.js
+|       ├── experience.js
 │       ├── about.js
 │       └── music.js
 │
@@ -82,7 +96,10 @@ http://localhost:5173
 │   └── posts.json
 │
 └── assets/
-    └── posts/
+    ├── favicon_io/
+    ├── posts/
+    └── projects/
+    
 ```
 
 ---
