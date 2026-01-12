@@ -1,35 +1,52 @@
+/* ==========================================================================
+   Projects Page
+   - Renders Featured projects, Commercial games, and external links
+   - Uses UI.esc() for safe HTML output
+   - Injects small page-specific CSS for the projects grid/cards
+   ========================================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
+  // --------------------------------------------------------------------------
+  // Root mount
+  // --------------------------------------------------------------------------
   const app = document.getElementById("app");
 
+  // --------------------------------------------------------------------------
+  // Data: Featured Projects
+  // --------------------------------------------------------------------------
   const featured = [
     {
       title: "Desktop4Kids OS",
       thumb: "assets/projects/desktop4kids.png",
       desc: "Electron-based desktop simulation for a safe, offline-first kid-friendly computer experience. Features a full desktop environment, window manager, multi-user accounts, sandboxed filesystem API, and built-in apps like File Explorer, Media Center, Notepad, Calculator, Paint, Settings, and a recoverable Trash system.",
-      tags: ["Electron", "Desktop UI", "Offline-first", "Local AI Tutor", "Window Manager", "Filesystem API"],
-      links: [
-        { label: "Repo", href: "https://github.com/iSev7n/Desktop4kids-OS" }
-      ]
+      tags: [
+        "Electron",
+        "Desktop UI",
+        "Offline-first",
+        "Local AI Tutor",
+        "Window Manager",
+        "Filesystem API"
+      ],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Desktop4kids-OS" }]
     },
     {
       title: "Genesis Script v2",
       desc: "A custom scripting language inspired by biblical terminology and designed for clarity, safety, and experimentation. Built as a complete language toolchain with a tokenizer, parser, interpreter, transpiler, CLI tools, and tests. Refactored and security-hardened with a clean, modular architecture. Uses the .gs file format.",
       tags: ["Language Design", "Interpreter", "Parser", "CLI Tools", "JavaScript"],
-      links: [
-        { label: "Repo", href: "https://github.com/iSev7n/Genesis-Script-v2" }
-      ]
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Genesis-Script-v2" }]
     },
     {
       title: "Dark Portfolio (Website Template)",
       thumb: "assets/projects/dark-portfolio.png",
       desc: "A clean, docs-style static portfolio template built with vanilla HTML, CSS, and JavaScript. Includes Posts (JSON + Markdown renderer), docs-style post view with sidebar tree, Projects grid, Music page with playlist embed, RSS feed support, theming, and a system-style UI layout.",
       tags: ["HTML", "CSS", "JavaScript", "Static Site", "Markdown", "RSS", "Docs-style UI"],
-      links: [
-        { label: "Repo", href: "https://github.com/iSev7n/Dark-Portfolio" }
-      ]
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Dark-Portfolio" }]
     }
   ];
 
+  // --------------------------------------------------------------------------
+  // Data: Commercial Games
+  // --------------------------------------------------------------------------
   const games = [
     {
       title: "Space Shooter (Codecanyon)",
@@ -54,6 +71,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
+  // --------------------------------------------------------------------------
+  // Data: More / External
+  // --------------------------------------------------------------------------
   const more = [
     {
       title: "GitHub Profile",
@@ -63,27 +83,44 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
+  // --------------------------------------------------------------------------
+  // UI Helpers
+  // --------------------------------------------------------------------------
+
+  /**
+   * Thumbnail block for a project/game.
+   * If no thumb is provided, render a clean placeholder.
+   */
   function thumbBlock(item) {
-    // If no thumb provided, show a clean placeholder block
     if (!item.thumb) {
       return `<div class="proj-thumb proj-thumb--placeholder" aria-hidden="true"></div>`;
     }
+
     return `
       <div class="proj-thumb">
-        <img src="${UI.esc(item.thumb)}" alt="${UI.esc(item.title)} thumbnail" loading="lazy">
+        <img
+          src="${UI.esc(item.thumb)}"
+          alt="${UI.esc(item.title)} thumbnail"
+          loading="lazy"
+        >
       </div>
     `;
   }
 
+  /**
+   * Render a single project card.
+   */
   function card(item) {
     const tags = (item.tags || [])
-      .map(t => `<span class="tag">${UI.esc(t)}</span>`)
+      .map((t) => `<span class="tag">${UI.esc(t)}</span>`)
       .join(" ");
 
     const links = (item.links || [])
       .map(
-        l =>
-          `<a class="btnlink" href="${UI.esc(l.href)}" target="_blank" rel="noopener">${UI.esc(l.label)}</a>`
+        (l) =>
+          `<a class="btnlink" href="${UI.esc(l.href)}" target="_blank" rel="noopener">${UI.esc(
+            l.label
+          )}</a>`
       )
       .join("");
 
@@ -112,6 +149,9 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  // --------------------------------------------------------------------------
+  // Render Page
+  // --------------------------------------------------------------------------
   app.innerHTML = `
     <div class="prose" style="margin-top:18px">
       <h2 style="margin:0 0 8px">Projects</h2>
@@ -142,6 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   `;
 
+  // --------------------------------------------------------------------------
+  // Page Styles (Projects-only)
+  // --------------------------------------------------------------------------
   const style = document.createElement("style");
   style.textContent = `
     .repo-grid{

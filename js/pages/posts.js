@@ -1,7 +1,27 @@
+/* ==========================================================================
+   js/pages/posts.js
+   Purpose:
+   - Renders the Posts index page (table)
+   - Supports:
+     - Sorting (newest / oldest / title)
+     - Live filtering (title / summary / tags)
+     - Reading-time estimate
+     - Row-click navigation (without breaking normal links)
+   Dependencies:
+   - window.Data.getPosts()
+   - window.UI (esc, fmt)
+   ========================================================================== */
+
 document.addEventListener("DOMContentLoaded", async () => {
+  /* ------------------------------------------------------------------------
+     Boot + data
+     ------------------------------------------------------------------------ */
   const app = document.getElementById("app");
   const posts = await Data.getPosts();
 
+  /* ------------------------------------------------------------------------
+     Page shell (toolbar + table)
+     ------------------------------------------------------------------------ */
   app.innerHTML = `
     <div class="toolbar">
       <div class="left">
@@ -34,11 +54,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     </table>
   `;
 
+  /* ------------------------------------------------------------------------
+     Element refs
+     ------------------------------------------------------------------------ */
   const rows = document.getElementById("rows");
   const order = document.getElementById("order");
   const q = document.getElementById("q");
   const count = document.getElementById("count");
 
+  /* ------------------------------------------------------------------------
+     Helpers
+     ------------------------------------------------------------------------ */
+
+  // Choose an emoji icon based on tags
   function iconFor(p) {
     const t = (p.tags || []).join(" ").toLowerCase();
     if (t.includes("ml") || t.includes("ai")) return "🧊";
@@ -51,24 +79,35 @@ document.addEventListener("DOMContentLoaded", async () => {
     return "📝";
   }
 
+  // Basic word count used for reading time
   function words(str) {
-    return (str || "").replace(/[`#>*_~\-]/g, " ").trim().split(/\s+/).filter(Boolean).length;
+    return (str || "")
+      .replace(/[`#>*_~\-]/g, " ")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean).length;
   }
 
+  // Reading time (minutes), 220 wpm baseline
   function readingTimeMinutes(p) {
     const w = words(p.body);
     if (!w) return null;
     return Math.max(1, Math.round(w / 220));
   }
 
+  /* ------------------------------------------------------------------------
+     Render
+     ------------------------------------------------------------------------ */
   function render() {
     const query = (q.value || "").toLowerCase().trim();
     let list = posts.slice();
 
+    // Sort
     if (order.value === "old") list.sort((a, b) => (a.date || "").localeCompare(b.date || ""));
     if (order.value === "new") list.sort((a, b) => (b.date || "").localeCompare(a.date || ""));
     if (order.value === "title") list.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
 
+    // Filter
     if (query) {
       list = list.filter((p) => {
         const hay = (p.title + " " + (p.summary || "") + " " + (p.tags || []).join(" ")).toLowerCase();
@@ -76,8 +115,10 @@ document.addEventListener("DOMContentLoaded", async () => {
       });
     }
 
+    // Count label
     count.textContent = `${list.length} post${list.length === 1 ? "" : "s"}`;
 
+    // Empty state
     if (!list.length) {
       rows.innerHTML = `
         <tr class="post-row">
@@ -92,6 +133,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       return;
     }
 
+    // Rows
     rows.innerHTML = list
       .map((p, i) => {
         const tags = (p.tags || []).slice(0, 6);
@@ -144,7 +186,14 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
+  /* ------------------------------------------------------------------------
+     Events
+     ------------------------------------------------------------------------ */
   order.addEventListener("change", render);
   q.addEventListener("input", render);
+
+  /* ------------------------------------------------------------------------
+     Initial paint
+     ------------------------------------------------------------------------ */
   render();
 });

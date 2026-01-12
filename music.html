@@ -1,24 +1,42 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <!-- ======================================================
+       Theme bootstrap (must run before paint)
+       ====================================================== -->
   <script>
     (function () {
       const t = localStorage.getItem("theme") || "dark";
       document.documentElement.setAttribute("data-theme", t);
     })();
   </script>
-  <title>Music | Portfolio</title>
+
+  <!-- ======================================================
+       Document meta
+       ====================================================== -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Music | Portfolio</title>
+
+  <!-- ======================================================
+       Styles
+       ====================================================== -->
   <link rel="stylesheet" href="css/base.css">
 </head>
+
 <body>
+  <!-- Shared layout mounts -->
   <div id="topbar"></div>
+
   <div class="container">
     <div id="hero"></div>
     <div id="app"></div>
   </div>
 
+  <!-- ======================================================
+       Core scripts (shared across pages)
+       ====================================================== -->
   <script src="js/ui.js"></script>
   <script src="js/icons.js"></script>
   <script src="js/config.js"></script>
@@ -26,10 +44,13 @@
   <script src="js/data.js"></script>
   <script src="js/layout.js"></script>
 
+  <!-- Shared layout render -->
   <script>
     renderTopbar();
     renderHero("music");
   </script>
+
+  <!-- Page script -->
   <script src="js/pages/music.js"></script>
 </body>
 </html>

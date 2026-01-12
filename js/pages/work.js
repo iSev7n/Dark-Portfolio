@@ -1,6 +1,23 @@
+/* ==========================================================================
+   js/pages/work.js
+   Purpose:
+   - Renders the Work page (career roles + education + key skills)
+   - Pure client-side render (no fetch)
+   Dependencies:
+   - UI.esc()
+   Behavior:
+   - Markup/content preserved exactly (only organized + labeled)
+   ========================================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
+  // --------------------------------------------------------------------------
+  // Mount
+  // --------------------------------------------------------------------------
   const app = document.getElementById("app");
 
+  // --------------------------------------------------------------------------
+  // Work Experience Items
+  // --------------------------------------------------------------------------
   const items = [
     {
       role: "Sensor Control Officer (Sensor Manager Cell)",
@@ -9,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
       bullets: [
         "Leads, trains, and mentors a team supporting ballistic missile defense operations with an emphasis on readiness and mission execution.",
         "Subject Matter Expert (SME) on C2BMC and AN/TPY-2 radar operations, supporting planning, coordination, and operational decision-making.",
-        "Supports leadership-focused reporting and transparent readiness tracking to improve operational awareness and prioritization."
-      ]
+        "Supports leadership-focused reporting and transparent readiness tracking to improve operational awareness and prioritization.",
+      ],
     },
     {
       role: "Early Warning System Manager (Sensor Manager Cell)",
@@ -21,8 +38,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Revised and implemented operational checklist improvements to increase reliability and reduce execution risk.",
         "Generated and distributed daily status reports reviewed at senior-leader level to support readiness awareness and planning.",
         "Supervised and accounted for $2M+ in communications equipment with zero loss or damage.",
-        "Selected as Unit Security Manager, ensuring secure handling of systems and verifying clearance requirements for 20+ personnel."
-      ]
+        "Selected as Unit Security Manager, ensuring secure handling of systems and verifying clearance requirements for 20+ personnel.",
+      ],
     },
     {
       role: "Early Warning Operator / Patriot Crew Member",
@@ -32,26 +49,32 @@ document.addEventListener("DOMContentLoaded", () => {
         "Supported real-time air and missile defense operations through surveillance, data analysis, and tactical communications.",
         "Managed accountability for $500K+ in communications and electronic equipment with 100% property control.",
         "Delivered technical training to personnel, supporting certification and improved team capability.",
-        "Worked with tactical data links (including Link-16) and systems integration processes in secure environments."
-      ]
-    }
+        "Worked with tactical data links (including Link-16) and systems integration processes in secure environments.",
+      ],
+    },
   ];
 
+  // --------------------------------------------------------------------------
+  // Education Items
+  // --------------------------------------------------------------------------
   const education = [
     {
       degree: "Bachelor of Business Administration (BBA)",
       school: "Upper Iowa University",
       focus: "Business Administration • Entrepreneurship Focus",
-      date: "Expected May 2026"
+      date: "Expected May 2026",
     },
     {
       degree: "Associate’s Degree",
       school: "Upper Iowa University",
       focus: "Business Administration",
-      date: "Completed May 2024"
-    }
+      date: "Completed May 2024",
+    },
   ];
 
+  // --------------------------------------------------------------------------
+  // Key Skills (displayed as pills)
+  // --------------------------------------------------------------------------
   const skills = [
     "Leadership & Team Development",
     "Systems Operations & Reliability",
@@ -60,9 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
     "Operational Reporting & Dashboards",
     "Process Improvement",
     "Technical Documentation",
-    "Cross-Functional Coordination"
+    "Cross-Functional Coordination",
   ];
 
+  // --------------------------------------------------------------------------
+  // Render (markup intentionally preserved)
+  // --------------------------------------------------------------------------
   app.innerHTML = `
     <div class="prose section-accent" style="margin-top:18px">
       <h2 style="margin:0 0 10px">Work</h2>
@@ -71,7 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
       </p>
     </div>
 
-    ${items.map(w => `
+    ${items
+      .map(
+        (w) => `
       <div class="card" style="margin-top:14px">
         <div class="card-h">
           <div>${UI.esc(w.role)} • ${UI.esc(w.org)}</div>
@@ -79,11 +107,13 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
         <div class="card-b">
           <ul style="margin:0; padding-left:18px; line-height:1.7">
-            ${w.bullets.map(b => `<li>${UI.esc(b)}</li>`).join("")}
+            ${w.bullets.map((b) => `<li>${UI.esc(b)}</li>`).join("")}
           </ul>
         </div>
       </div>
-    `).join("")}
+    `
+      )
+      .join("")}
 
     <div class="prose section-accent" style="margin-top:18px">
       <h3 style="margin:0 0 10px">Education</h3>
@@ -92,7 +122,9 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
 
-    ${education.map(e => `
+    ${education
+      .map(
+        (e) => `
       <div class="card edu-card" style="margin-top:14px">
         <div class="card-h">
           <div>
@@ -106,12 +138,14 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
       </div>
-    `).join("")}
+    `
+      )
+      .join("")}
 
     <div class="prose section-accent" style="margin-top:18px">
       <h3 style="margin:0 0 12px">Key Skills</h3>
       <div class="skills-wrap">
-        ${skills.map(s => `<span class="skill-pill">${UI.esc(s)}</span>`).join("")}
+        ${skills.map((s) => `<span class="skill-pill">${UI.esc(s)}</span>`).join("")}
       </div>
     </div>
   `;

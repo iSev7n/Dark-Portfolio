@@ -1,12 +1,36 @@
+/* ==========================================================================
+   js/pages/about.js
+   Purpose:
+   - Renders the About page (main prose + right-side cards)
+   - Sections:
+     - About prose (left)
+     - Pinned links (right)
+     - Snapshot highlights (right)
+     - Last updated (right)
+     - Now Playing (right)
+   Dependencies:
+   - window.SITE_CONFIG
+   - UI.esc()
+   ========================================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
+  // --------------------------------------------------------------------------
+  // Config + mount
+  // --------------------------------------------------------------------------
   const cfg = window.SITE_CONFIG;
+
+  // Config-driven “Now Playing” card (with safe fallback)
   const np = cfg.nowPlaying || {
     title: "Main Playlist",
     desc: "My go-to background playlist for coding and deep focus.",
-    href: "music.html"
+    href: "music.html",
   };
+
   const app = document.getElementById("app");
 
+  // --------------------------------------------------------------------------
+  // Data: Snapshot highlights
+  // --------------------------------------------------------------------------
   const highlights = [
     { label: "Primary stack", value: "HTML • CSS • JavaScript • Electron" },
     { label: "Focus", value: "System-style UIs • Offline-first • UI architecture" },
@@ -14,33 +38,42 @@ document.addEventListener("DOMContentLoaded", () => {
     { label: "Education", value: "Business Admin (Entrepreneurship) • Upper Iowa University" },
   ];
 
+  // --------------------------------------------------------------------------
+  // Data: Pinned links
+  // --------------------------------------------------------------------------
   const pinned = [
     {
       title: "Desktop4Kids OS",
       desc: "Electron desktop simulation for a safe, offline-first learning environment.",
       href: "projects.html",
-      external: false
+      external: false,
     },
     {
       title: "Genesis Script v2",
       desc: "A beginner-friendly scripting language with a full toolchain (tokenizer → parser → interpreter).",
       href: "projects.html",
-      external: false
+      external: false,
     },
     {
       title: "My GitHub",
       desc: "Repos, experiments, and long-term builds.",
       href: "https://github.com/iSev7n",
-      external: true
+      external: true,
     },
   ];
 
+  // NOTE: This object existed previously but was not used by the template.
+  // Kept as a labeled placeholder for future expansion (no behavior impact).
   const nowPlaying = {
     title: "Main Playlist",
     desc: "My go-to background playlist for coding and deep focus.",
-    href: "music.html"
+    href: "music.html",
   };
+  void nowPlaying; // prevents “unused” warnings in some editors
 
+  // --------------------------------------------------------------------------
+  // Helper: render list items with optional last-row styling
+  // --------------------------------------------------------------------------
   const renderList = (items, renderRow) =>
     items
       .map((item, i) => {
@@ -49,6 +82,9 @@ document.addEventListener("DOMContentLoaded", () => {
       })
       .join("");
 
+  // --------------------------------------------------------------------------
+  // Render (markup intentionally unchanged)
+  // --------------------------------------------------------------------------
   app.innerHTML = `
     <div class="about-grid">
       <section class="prose section-accent">
@@ -110,7 +146,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="card">
           <div class="card-h">📌 Pinned</div>
           <div class="card-b">
-            ${renderList(pinned, (p, isLast) => `
+            ${renderList(
+              pinned,
+              (p, isLast) => `
               <div style="padding:10px 0; ${isLast ? "" : "border-bottom:1px solid var(--border)"}">
                 <div style="font-weight:700">
                   <a href="${UI.esc(p.href)}" ${p.external ? `target="_blank" rel="noopener"` : ""}>
@@ -119,19 +157,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
                 <div class="small" style="margin-top:6px; line-height:1.6">${UI.esc(p.desc)}</div>
               </div>
-            `)}
+            `
+            )}
           </div>
         </div>
 
         <div class="card">
           <div class="card-h">⚙️ Snapshot</div>
           <div class="card-b">
-            ${renderList(highlights, (h, isLast) => `
+            ${renderList(
+              highlights,
+              (h, isLast) => `
               <div class="row" style="padding:8px 0; ${isLast ? "" : "border-bottom:1px solid var(--border)"}">
                 <div class="small">${UI.esc(h.label)}:</div>
                 <div class="small" style="text-align:right">${UI.esc(h.value)}</div>
               </div>
-            `)}
+            `
+            )}
           </div>
         </div>
 
@@ -170,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
         </div>
 
-
+        
       </aside>
     </div>
   `;

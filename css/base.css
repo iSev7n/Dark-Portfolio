@@ -1,16 +1,33 @@
-/* =========================
-   THEME TOKENS
-========================= */
+/* ==========================================================================
+   BASE.CSS
+   Purpose:
+   - Global theme tokens (dark + light)
+   - Core layout + typography
+   - Shared UI components (topbar, hero, tabs, cards, tables, docs layout)
+   - Posts list styling
+   - Utility styles (pills, buttons, images)
+   - Responsive behavior
+   - Scrollbar styling
+   ========================================================================== */
+
+
+/* ==========================================================================
+   1) THEME TOKENS
+   ========================================================================== */
 :root{
   --bg:#121212;
   --panel:#171717;
   --panel2:#141414;
+
   --text:#e7e7e7;
   --muted:#b8b8b8;
   --dim:#8d8d8d;
+
   --border:#2a2a2a;
+
   --accent:#63a3ff;
   --accent2:#b084ff;
+
   --shadow: 0 12px 30px rgba(0,0,0,.45);
   --radius:10px;
 
@@ -22,14 +39,17 @@ html[data-theme="light"]{
   --bg:#e9e9ea;
   --panel:#f0f0f1;
   --panel2:#f3f3f4;
+
   --text:#0f0f10;
   --muted:#2f2f33;
   --dim:#51515a;
+
   --border:#cfcfd4;
+
   --accent:#1f6feb;
 }
 
-/* light-mode elevation */
+/* Light mode elevation */
 html[data-theme="light"] .prose,
 html[data-theme="light"] .card,
 html[data-theme="light"] .sidebar,
@@ -39,9 +59,9 @@ html[data-theme="light"] .table{
 }
 
 
-/* =========================
-   BASE / RESETS
-========================= */
+/* ==========================================================================
+   2) BASE / RESETS
+   ========================================================================== */
 *{ box-sizing:border-box; }
 html,body{ height:100%; }
 
@@ -62,9 +82,9 @@ a:hover{ filter:brightness(1.15); }
 }
 
 
-/* =========================
-   TOP BAR
-========================= */
+/* ==========================================================================
+   3) TOP BAR
+   ========================================================================== */
 .topbar{
   position:sticky;
   top:0;
@@ -108,6 +128,7 @@ a:hover{ filter:brightness(1.15); }
 
 .topnav a{ color:var(--muted); }
 .topnav a:hover{ color:var(--text); }
+
 .topnav .sep{ opacity:.35; }
 
 .topbtn{
@@ -134,15 +155,19 @@ html[data-theme="light"] .topbtn:hover{
 }
 
 
-/* =========================
-   LAYOUT WRAPPERS
-========================= */
+/* ==========================================================================
+   4) LAYOUT WRAPPERS
+   ========================================================================== */
 .container{
   width:min(1250px, 94vw);
   margin:0 auto;
   padding:22px 0 70px;
 }
 
+
+/* ==========================================================================
+   5) HERO (AVATAR, INTRO, ICONS, TABS)
+   ========================================================================== */
 .hero{
   display:flex;
   flex-direction:column;
@@ -162,7 +187,7 @@ html[data-theme="light"] .topbtn:hover{
   background:#1b1b1b;
 }
 
-/* old gradient style when no image */
+/* Gradient style when no image */
 .avatar:not(.avatar-img){
   background:
     radial-gradient(circle at 30% 25%, rgba(99,163,255,.35), transparent 55%),
@@ -170,7 +195,7 @@ html[data-theme="light"] .topbtn:hover{
     #1b1b1b;
 }
 
-/* photo style */
+/* Photo style */
 .avatar.avatar-img img{
   width:100%;
   height:100%;
@@ -184,6 +209,7 @@ html[data-theme="light"] .topbtn:hover{
   font-size:24px;
   color:var(--text);
 }
+
 .hi .wave{ margin-right:8px; }
 
 .iconrow{
@@ -194,14 +220,19 @@ html[data-theme="light"] .topbtn:hover{
   justify-content:center;
 }
 
+/* Inline SVG icons */
 .ico{
   width:18px;
   height:18px;
   opacity:.85;
   color:var(--muted);
 }
-.ico:hover{ opacity:1; color:var(--text); }
+.ico:hover{
+  opacity:1;
+  color:var(--text);
+}
 
+/* Tabs */
 .tabs{
   margin-top:18px;
   display:flex;
@@ -220,26 +251,30 @@ html[data-theme="light"] .topbtn:hover{
   border-radius:0;
   color:var(--muted);
 }
+
 .tab.active{
   outline:1px solid rgba(99,163,255,.55);
   color:var(--text);
 }
+
 .tab:hover{ color:var(--text); }
 
 
-/* =========================
-   CONTENT BLOCKS
-========================= */
+/* ==========================================================================
+   6) CONTENT BLOCKS (PROSE + CARDS)
+   ========================================================================== */
 .prose{
   border:1px solid var(--border);
   background:var(--panel2);
   padding:18px;
 }
+
 .prose p{
   color:var(--text);
   line-height:1.7;
   margin:0 0 14px;
 }
+
 .prose .muted{ color:var(--muted); }
 .prose a{ color:var(--accent); }
 
@@ -249,6 +284,7 @@ html[data-theme="light"] .topbtn:hover{
   border:1px solid var(--border);
 }
 
+/* Accent bar for headings blocks */
 .prose.section-accent{
   position:relative;
 }
@@ -264,7 +300,11 @@ html[data-theme="light"] .topbtn:hover{
 }
 
 /* Cards */
-.sidecards{ display:flex; flex-direction:column; gap:12px; }
+.sidecards{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
 
 .card{
   border:1px solid var(--border);
@@ -281,16 +321,31 @@ html[data-theme="light"] .topbtn:hover{
 }
 
 .card-b{ padding:12px; }
-.card-b .row{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
-.card-b .small{ color:var(--dim); font-size:12px; }
 
-details summary{ cursor:pointer; list-style:none; color:var(--muted); }
+.card-b .row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.card-b .small{
+  color:var(--dim);
+  font-size:12px;
+}
+
+/* Details */
+details summary{
+  cursor:pointer;
+  list-style:none;
+  color:var(--muted);
+}
 details summary::-webkit-details-marker{ display:none; }
 
 
-/* =========================
-   TOOLBAR / INPUTS
-========================= */
+/* ==========================================================================
+   7) TOOLBAR / INPUTS
+   ========================================================================== */
 .toolbar{
   display:flex;
   gap:14px;
@@ -332,9 +387,9 @@ select, input{
 input{ min-width:220px; }
 
 
-/* =========================
-   TABLES
-========================= */
+/* ==========================================================================
+   8) TABLES
+   ========================================================================== */
 .table{
   margin-top:14px;
   width:100%;
@@ -368,14 +423,27 @@ html[data-theme="light"] .table tr:hover td{
   background: color-mix(in srgb, var(--accent) 14%, transparent);
 }
 
-.t-title{ display:flex; gap:10px; align-items:flex-start; }
-.emoji{ width:18px; display:inline-flex; justify-content:center; }
-.datecol{ white-space:nowrap; color:var(--muted); }
+.t-title{
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+}
+
+.emoji{
+  width:18px;
+  display:inline-flex;
+  justify-content:center;
+}
+
+.datecol{
+  white-space:nowrap;
+  color:var(--muted);
+}
 
 
-/* =========================
-   DOCS LAYOUT (SIDEBAR + CONTENT)
-========================= */
+/* ==========================================================================
+   9) DOCS LAYOUT (SIDEBAR + CONTENT)
+   ========================================================================== */
 .docs{
   display:grid;
   grid-template-columns:290px 1fr;
@@ -404,6 +472,7 @@ html[data-theme="light"] .table tr:hover td{
   color:var(--muted);
 }
 
+/* Sidebar tree */
 .tree .year{
   margin:10px 0 6px;
   color:var(--muted);
@@ -428,6 +497,7 @@ html[data-theme="light"] .table tr:hover td{
   background: color-mix(in srgb, var(--accent) 12%, transparent);
 }
 
+/* Main docs content */
 .content{
   border:1px solid var(--border);
   background:var(--panel2);
@@ -455,9 +525,9 @@ html[data-theme="light"] .table tr:hover td{
 }
 
 
-/* =========================
-   POSTS LIST POLISH
-========================= */
+/* ==========================================================================
+   10) POSTS LIST POLISH
+   ========================================================================== */
 .posts-table .datehead{
   width:140px;
   text-align:left;
@@ -520,11 +590,16 @@ html[data-theme="light"] .table tr:hover td{
 }
 
 
-/* =========================
-   TYPOGRAPHY / CODE
-========================= */
+/* ==========================================================================
+   11) TYPOGRAPHY / CODE BLOCKS
+   ========================================================================== */
 h1,h2,h3{ font-family:var(--mono); }
-hr{ border:none; border-top:1px solid var(--border); margin:18px 0; }
+
+hr{
+  border:none;
+  border-top:1px solid var(--border);
+  margin:18px 0;
+}
 
 pre{
   padding:12px;
@@ -533,13 +608,21 @@ pre{
   overflow:auto;
 }
 
-.footer{ margin-top:18px; color:var(--dim); font-size:12px; }
+.footer{
+  margin-top:18px;
+  color:var(--dim);
+  font-size:12px;
+}
 
 
-/* =========================
-   SKILLS PILLS
-========================= */
-.skills-wrap{ display:flex; flex-wrap:wrap; gap:10px; }
+/* ==========================================================================
+   12) SKILLS PILLS
+   ========================================================================== */
+.skills-wrap{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
 
 .skill-pill{
   padding:6px 10px;
@@ -558,9 +641,9 @@ pre{
 }
 
 
-/* =========================
-   RESPONSIVE
-========================= */
+/* ==========================================================================
+   13) RESPONSIVE LAYOUT
+   ========================================================================== */
 .about-grid{
   margin-top:18px;
   display:grid;
@@ -573,7 +656,7 @@ pre{
   .about-grid{ grid-template-columns:1fr; }
   .docs{ grid-template-columns:1fr; }
 
-  /* Mobile: don't let the sidebar follow while scrolling */
+  /* Mobile: sidebar should scroll naturally in flow */
   .sidebar{
     position:static;
     top:auto;
@@ -591,6 +674,10 @@ pre{
   margin-right:6px;
 }
 
+
+/* ==========================================================================
+   14) BUTTONS / LINKS
+   ========================================================================== */
 .openbtn{
   display:inline-flex;
   align-items:center;
@@ -606,16 +693,22 @@ pre{
   white-space:nowrap;
   transition: border-color .15s ease, background .15s ease, transform .12s ease;
 }
+
 .openbtn:hover{
   border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
   background: color-mix(in srgb, var(--accent) 10%, var(--panel2));
   transform: translateY(-1px);
 }
+
 @media (prefers-reduced-motion: reduce){
   .openbtn{ transition:none !important; }
   .openbtn:hover{ transform:none !important; }
 }
 
+
+/* ==========================================================================
+   15) CONTENT MEDIA (POST IMAGES + CAPTIONS)
+   ========================================================================== */
 .content img{
   display:block;
   max-width:100%;
@@ -624,6 +717,7 @@ pre{
   border-radius:12px;
   margin:14px 0 8px;
 }
+
 .content em{
   font-style: italic;
   color: inherit;
@@ -632,7 +726,7 @@ pre{
   margin: 0;
 }
 
-/* figure caption look */
+/* Caption look (used in post bodies) */
 .content .caption{
   color: var(--dim);
   font-size: 12px;
@@ -640,45 +734,71 @@ pre{
   line-height: 1.5;
 }
 
-/* ===============================
-   Subtle dark UI scrollbar
-   =============================== */
 
+/* ==========================================================================
+   16) SCROLLBARS (SUBTLE SYSTEM UI)
+   ========================================================================== */
 /* Firefox */
-* {
+*{
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--border) 65%, var(--accent) 35%) transparent;
 }
 
 /* WebKit / Chromium */
-*::-webkit-scrollbar {
+*::-webkit-scrollbar{
   width: 8px;
   height: 8px;
 }
 
-*::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track{
   background: transparent;
 }
 
-*::-webkit-scrollbar-thumb {
-  background: color-mix(
-    in srgb,
-    var(--border) 70%,
-    var(--accent) 30%
-  );
+*::-webkit-scrollbar-thumb{
+  background: color-mix(in srgb, var(--border) 70%, var(--accent) 30%);
   border-radius: 999px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
-*::-webkit-scrollbar-thumb:hover {
-  background: color-mix(
-    in srgb,
-    var(--border) 55%,
-    var(--accent) 45%
-  );
+*::-webkit-scrollbar-thumb:hover{
+  background: color-mix(in srgb, var(--border) 55%, var(--accent) 45%);
 }
 
-*::-webkit-scrollbar-corner {
+*::-webkit-scrollbar-corner{
   background: transparent;
 }
+
+/* Safety: prevent any child from forcing page width */
+img, svg, iframe{
+  max-width:100%;
+}
+
+/* --------------------------------------------------------------------------
+   Topbar: prevent mobile horizontal overflow
+   -------------------------------------------------------------------------- */
+
+.topnav{
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* Mobile tightening */
+@media (max-width: 520px){
+  .topnav{
+    gap: 10px;
+  }
+
+  .topnav a,
+  .topnav button{
+    padding-inline: 6px;
+  }
+}
+
+/* Prevent SVG icons from stretching layout */
+.topnav .ico,
+.topico svg{
+  max-width: 18px;
+  flex-shrink: 0;
+}
+

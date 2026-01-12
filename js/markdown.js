@@ -1,4 +1,24 @@
+/* ==========================================================================
+   markdown.js
+   Purpose:
+   - Lightweight, safe Markdown → HTML renderer (offline-first)
+   - Escapes raw HTML to prevent injection
+   - Supports:
+     - Headings (#, ##, ###)
+     - Horizontal rules (---)
+     - Unordered lists (- item)
+     - Fenced code blocks (```lang)
+     - Inline: images, links, code, bold, italic
+   Notes:
+   - Intentionally minimal and predictable (not full CommonMark)
+   - Behavior preserved exactly from your original implementation
+   ========================================================================== */
+
 (function () {
+  /* --------------------------------------------------------------------------
+     Escaping helpers
+     -------------------------------------------------------------------------- */
+
   function esc(s) {
     return String(s ?? "")
       .replaceAll("&", "&amp;")
@@ -10,11 +30,17 @@
     return esc(s).replaceAll('"', "&quot;").replaceAll("'", "&#39;");
   }
 
+  /* --------------------------------------------------------------------------
+     Inline Markdown (single-line transforms)
+     - IMPORTANT: escape first to block raw HTML injection
+     - IMPORTANT: images before links to avoid mis-parsing
+     -------------------------------------------------------------------------- */
+
   function inline(md) {
     // Escape first so raw HTML in post bodies can't inject markup.
     let s = esc(md);
 
-    // ✅ Images FIRST: ![alt](url)
+    // Images FIRST: ![alt](url)
     s = s.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, (_m, alt, url) => {
       const a = escAttr(alt);
       const u = escAttr(url);
@@ -28,7 +54,7 @@
       return `<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
     });
 
-    // Inline code
+    // Inline code: `code`
     s = s.replace(/`([^`]+)`/g, (_m, p1) => `<code>${p1}</code>`);
 
     // Bold then italic
@@ -38,12 +64,17 @@
     return s;
   }
 
+  /* --------------------------------------------------------------------------
+     Block Markdown (line-based parsing)
+     -------------------------------------------------------------------------- */
+
   function toHtml(md) {
     const lines = String(md ?? "").replaceAll("\r\n", "\n").split("\n");
-    let out = [],
-      inList = false,
-      inCode = false,
-      lang = "";
+
+    let out = [];
+    let inList = false;
+    let inCode = false;
+    let lang = "";
 
     const flushList = () => {
       if (inList) {
@@ -68,6 +99,7 @@
         continue;
       }
 
+      // Inside code block: escape raw and preserve newlines
       if (inCode) {
         out.push(esc(line) + "\n");
         continue;
@@ -100,7 +132,7 @@
         continue;
       }
 
-      // Blank line
+      // Blank line ends list/paragraph flow
       if (line.trim() === "") {
         flushList();
         continue;
@@ -115,5 +147,6 @@
     return out.join("\n");
   }
 
+  // Public API
   window.Markdown = { toHtml };
 })();

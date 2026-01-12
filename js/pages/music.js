@@ -1,14 +1,40 @@
+/* ==========================================================================
+   js/pages/music.js
+   Purpose:
+   - Renders the Music page
+   - Pulls playlist metadata from SITE_CONFIG (with safe fallbacks)
+   - Embeds the YouTube playlist via <iframe>
+   Dependencies:
+   - window.SITE_CONFIG
+   - UI.esc()
+   ========================================================================== */
+
 document.addEventListener("DOMContentLoaded", () => {
+  // --------------------------------------------------------------------------
+  // Mount + config
+  // --------------------------------------------------------------------------
   const app = document.getElementById("app");
   const cfg = window.SITE_CONFIG || {};
 
+  // --------------------------------------------------------------------------
+  // Playlist config (fallback-safe)
+  // --------------------------------------------------------------------------
   const playlist = {
     name: (cfg.nowPlaying && cfg.nowPlaying.title) || "Main Playlist",
-    desc: (cfg.nowPlaying && cfg.nowPlaying.desc) || "My go-to background playlist for coding and deep focus.",
-    ytListId: (cfg.music && cfg.music.ytListId) || "PLY2pabb5IMzATuTdV4NeEDaZY5rpEYngu",
-    open: (cfg.music && cfg.music.open) || "https://music.youtube.com/playlist?list=PLY2pabb5IMzATuTdV4NeEDaZY5rpEYngu"
+    desc:
+      (cfg.nowPlaying && cfg.nowPlaying.desc) ||
+      "My go-to background playlist for coding and deep focus.",
+    ytListId:
+      (cfg.music && cfg.music.ytListId) ||
+      "PLY2pabb5IMzATuTdV4NeEDaZY5rpEYngu",
+    open:
+      (cfg.music && cfg.music.open) ||
+      "https://music.youtube.com/playlist?list=PLY2pabb5IMzATuTdV4NeEDaZY5rpEYngu",
   };
 
+  // --------------------------------------------------------------------------
+  // Render (markup intentionally unchanged)
+  // --------------------------------------------------------------------------
   app.innerHTML = `
     <div class="prose section-accent" style="margin-top:18px">
       <h2 style="margin:0 0 10px">Music</h2>
@@ -38,7 +64,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="music-embed">
           <iframe
-            src="https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(playlist.ytListId)}"
+            src="https://www.youtube.com/embed/videoseries?list=${encodeURIComponent(
+              playlist.ytListId
+            )}"
             title="YouTube playlist player"
             frameborder="0"
             allow="autoplay; encrypted-media"
