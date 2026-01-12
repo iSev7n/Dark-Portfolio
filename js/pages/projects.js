@@ -18,6 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
       links: [
         { label: "Repo", href: "https://github.com/iSev7n/Genesis-Script-v2" }
       ]
+    },
+    {
+      title: "Dark Portfolio (Website Template)",
+      thumb: "assets/projects/dark-portfolio.png",
+      desc: "A clean, docs-style static portfolio template built with vanilla HTML, CSS, and JavaScript. Includes Posts (JSON + Markdown renderer), docs-style post view with sidebar tree, Projects grid, Music page with playlist embed, RSS feed support, theming, and a system-style UI layout.",
+      tags: ["HTML", "CSS", "JavaScript", "Static Site", "Markdown", "RSS", "Docs-style UI"],
+      links: [
+        { label: "Repo", href: "https://github.com/iSev7n/Dark-Portfolio" }
+      ]
     }
   ];
 
