@@ -19,15 +19,15 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "Desktop4Kids OS",
       thumb: "assets/projects/desktop4kids.png",
       desc: "Electron-based desktop simulation for a safe, offline-first kid-friendly computer experience. Features a full desktop environment, window manager, multi-user accounts, sandboxed filesystem API, and built-in apps like File Explorer, Media Center, Notepad, Calculator, Paint, Settings, and a recoverable Trash system.",
-      tags: [
-        "Electron",
-        "Desktop UI",
-        "Offline-first",
-        "Local AI Tutor",
-        "Window Manager",
-        "Filesystem API"
-      ],
+      tags: ["Electron", "Desktop UI", "Offline-first", "Local AI Tutor", "Window Manager", "Filesystem API"],
       links: [{ label: "Repo", href: "https://github.com/iSev7n/Desktop4kids-OS" }]
+    },
+    {
+      title: "Nightlamp Bible",
+      thumb: "assets/projects/nightlamp.png",
+      desc: "Night Lamp Bible Reader is a fast, offline-first Scripture reader designed for focused study, highlighting, note-taking, and bookmarking — even with no internet connection. It is built as a Progressive Web App (PWA) and runs smoothly on desktop and mobile devices.",
+      tags: ["HTML", "CSS", "JavaScript", "Static Site", "Offline-first"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Nightlamp-Bible" }]
     },
     {
       title: "Genesis Script v2",
