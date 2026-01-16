@@ -34,13 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "A custom scripting language inspired by biblical terminology and designed for clarity, safety, and experimentation. Built as a complete language toolchain with a tokenizer, parser, interpreter, transpiler, CLI tools, and tests. Refactored and security-hardened with a clean, modular architecture. Uses the .gs file format.",
       tags: ["Language Design", "Interpreter", "Parser", "CLI Tools", "JavaScript"],
       links: [{ label: "Repo", href: "https://github.com/iSev7n/Genesis-Script-v2" }]
-    },
-    {
-      title: "Dark Portfolio (Website Template)",
-      thumb: "assets/projects/dark-portfolio.png",
-      desc: "A clean, docs-style static portfolio template built with vanilla HTML, CSS, and JavaScript. Includes Posts (JSON + Markdown renderer), docs-style post view with sidebar tree, Projects grid, Music page with playlist embed, RSS feed support, theming, and a system-style UI layout.",
-      tags: ["HTML", "CSS", "JavaScript", "Static Site", "Markdown", "RSS", "Docs-style UI"],
-      links: [{ label: "Repo", href: "https://github.com/iSev7n/Dark-Portfolio" }]
     }
   ];
 
@@ -80,6 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
       desc: "More projects, experiments, and active development work.",
       tags: ["GitHub", "Open Source"],
       links: [{ label: "Open", href: "https://github.com/iSev7n" }]
+    },
+    {
+      title: "Dark Portfolio (Website Template)",
+      thumb: "assets/projects/dark-portfolio.png",
+      desc: "A clean, docs-style static portfolio template built with vanilla HTML, CSS, and JavaScript. Includes Posts (JSON + Markdown renderer), docs-style post view with sidebar tree, Projects grid, Music page with playlist embed, RSS feed support, theming, and a system-style UI layout.",
+      tags: ["HTML", "CSS", "JavaScript", "Static Site", "Markdown", "RSS", "Docs-style UI"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Dark-Portfolio" }]
     }
   ];
 
