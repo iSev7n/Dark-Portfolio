@@ -1,19 +1,18 @@
 /* ==========================================================================
    Projects Page
-   - Renders Featured projects, Commercial games, and external links
+   - Category-based layout: Featured, Software, Games, Web Development, All Other
    - Uses UI.esc() for safe HTML output
    - Injects small page-specific CSS for the projects grid/cards
    ========================================================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --------------------------------------------------------------------------
-  // Root mount
-  // --------------------------------------------------------------------------
   const app = document.getElementById("app");
 
   // --------------------------------------------------------------------------
-  // Data: Featured Projects
+  // Data
   // --------------------------------------------------------------------------
+
+  // Featured: Desktop4Kids OS, Nightlamp
   const featured = [
     {
       title: "Desktop4Kids OS",
@@ -25,21 +24,38 @@ document.addEventListener("DOMContentLoaded", () => {
     {
       title: "Nightlamp Bible",
       thumb: "assets/projects/nightlamp.png",
-      desc: "Night Lamp Bible Reader is a fast, offline-first Scripture reader designed for focused study, highlighting, note-taking, and bookmarking — even with no internet connection. It is built as a Progressive Web App (PWA) and runs smoothly on desktop and mobile devices.",
-      tags: ["HTML", "CSS", "JavaScript", "Static Site", "Offline-first"],
+      desc: "Fast, offline-first Scripture reader designed for focused study, highlighting, note-taking, and bookmarking. Built as a Progressive Web App (PWA) and runs smoothly on desktop and mobile.",
+      tags: ["HTML", "CSS", "JavaScript", "PWA", "Offline-first"],
       links: [{ label: "Repo", href: "https://github.com/iSev7n/Nightlamp-Bible" }]
-    },
-    {
-      title: "Genesis Script v2",
-      desc: "A custom scripting language inspired by biblical terminology and designed for clarity, safety, and experimentation. Built as a complete language toolchain with a tokenizer, parser, interpreter, transpiler, CLI tools, and tests. Refactored and security-hardened with a clean, modular architecture. Uses the .gs file format.",
-      tags: ["Language Design", "Interpreter", "Parser", "CLI Tools", "JavaScript"],
-      links: [{ label: "Repo", href: "https://github.com/iSev7n/Genesis-Script-v2" }]
     }
   ];
 
-  // --------------------------------------------------------------------------
-  // Data: Commercial Games
-  // --------------------------------------------------------------------------
+  // Software: Desktop4Kids OS, Night Lamp, Linux-Healthcheck
+  const software = [
+    {
+      title: "Desktop4Kids OS",
+      thumb: "assets/projects/desktop4kids.png",
+      desc: "Electron-based desktop simulation for a safe, offline-first kid-friendly computer experience.",
+      tags: ["Electron", "Desktop UI", "Offline-first"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Desktop4kids-OS" }]
+    },
+    {
+      title: "Nightlamp Bible",
+      thumb: "assets/projects/nightlamp.png",
+      desc: "Offline-first Bible reader with a focused UI for highlighting, notes, and bookmarks.",
+      tags: ["HTML", "CSS", "JavaScript", "PWA"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Nightlamp-Bible" }]
+    },
+    {
+      title: "Linux Healthcheck",
+      thumb: "assets/projects/linux-healthcheck.png",
+      desc: "A Linux healthcheck tool with quick/deep checks (SMART, temps, top processes) and exportable reports for easy system diagnostics.",
+      tags: ["Linux", "Diagnostics", "Healthcheck", "Reports"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Linux-Healthcheck" }]
+    }
+  ];
+
+  // Games: Space Shooter, Matching Game, Math Game
   const games = [
     {
       title: "Space Shooter (Codecanyon)",
@@ -64,22 +80,38 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   ];
 
-  // --------------------------------------------------------------------------
-  // Data: More / External
-  // --------------------------------------------------------------------------
-  const more = [
+  // Web Development: Dark Portfolio, E-Commerce
+  const webdev = [
+    {
+      title: "Dark Portfolio (Website Template)",
+      thumb: "assets/projects/dark-portfolio.png",
+      desc: "A clean docs-style static portfolio template built with vanilla HTML, CSS, and JavaScript. Includes Posts (JSON + Markdown renderer), docs-style post view with sidebar tree, Projects grid, Music page with playlist embed, RSS feed support, theming, and a system-style UI layout.",
+      tags: ["HTML", "CSS", "JavaScript", "Static Site", "Markdown", "RSS"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Dark-Portfolio" }]
+    },
+    {
+      title: "E-Commerce Template",
+      thumb: "assets/projects/ecommerce-template.png",
+      desc: "Modern e-commerce website template with product grid layout, smooth UI, and a solid base for expanding into a full storefront.",
+      tags: ["HTML", "CSS", "JavaScript", "Template"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/ecommerce-template" }]
+    }
+  ];
+
+  // All Other: GitHub Profile, Genesis Script v2
+  const allOther = [
     {
       title: "GitHub Profile",
+      thumb: "assets/projects/github-profile.png",
       desc: "More projects, experiments, and active development work.",
       tags: ["GitHub", "Open Source"],
       links: [{ label: "Open", href: "https://github.com/iSev7n" }]
     },
     {
-      title: "Dark Portfolio (Website Template)",
-      thumb: "assets/projects/dark-portfolio.png",
-      desc: "A clean, docs-style static portfolio template built with vanilla HTML, CSS, and JavaScript. Includes Posts (JSON + Markdown renderer), docs-style post view with sidebar tree, Projects grid, Music page with playlist embed, RSS feed support, theming, and a system-style UI layout.",
-      tags: ["HTML", "CSS", "JavaScript", "Static Site", "Markdown", "RSS", "Docs-style UI"],
-      links: [{ label: "Repo", href: "https://github.com/iSev7n/Dark-Portfolio" }]
+      title: "Genesis Script v2",
+      desc: "A custom scripting language inspired by biblical terminology and designed for clarity, safety, and experimentation. Built as a complete language toolchain with a tokenizer, parser, interpreter, transpiler, CLI tools, and tests. Refactored and security-hardened with a clean, modular architecture. Uses the .gs file format.",
+      tags: ["Language Design", "Interpreter", "Parser", "CLI Tools", "JavaScript"],
+      links: [{ label: "Repo", href: "https://github.com/iSev7n/Genesis-Script-v2" }]
     }
   ];
 
@@ -87,10 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // UI Helpers
   // --------------------------------------------------------------------------
 
-  /**
-   * Thumbnail block for a project/game.
-   * If no thumb is provided, render a clean placeholder.
-   */
   function thumbBlock(item) {
     if (!item.thumb) {
       return `<div class="proj-thumb proj-thumb--placeholder" aria-hidden="true"></div>`;
@@ -107,9 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-  /**
-   * Render a single project card.
-   */
   function card(item) {
     const tags = (item.tags || [])
       .map((t) => `<span class="tag">${UI.esc(t)}</span>`)
@@ -149,6 +174,17 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
+  function section(title, items) {
+    return `
+      <div class="prose" style="margin-top:14px">
+        <h3 style="margin:0 0 10px">${UI.esc(title)}</h3>
+        <div class="repo-grid">
+          ${items.map(card).join("")}
+        </div>
+      </div>
+    `;
+  }
+
   // --------------------------------------------------------------------------
   // Render Page
   // --------------------------------------------------------------------------
@@ -156,30 +192,15 @@ document.addEventListener("DOMContentLoaded", () => {
     <div class="prose" style="margin-top:18px">
       <h2 style="margin:0 0 8px">Projects</h2>
       <p class="muted" style="margin:0">
-        Selected work across web apps, dashboards, and commercial HTML5 games.
+        Organized by category so it stays clean and easy to build on.
       </p>
     </div>
 
-    <div class="prose" style="margin-top:14px">
-      <h3 style="margin:0 0 10px">Featured</h3>
-      <div class="repo-grid">
-        ${featured.map(card).join("")}
-      </div>
-    </div>
-
-    <div class="prose" style="margin-top:14px">
-      <h3 style="margin:0 0 10px">Games (Commercial)</h3>
-      <div class="repo-grid">
-        ${games.map(card).join("")}
-      </div>
-    </div>
-
-    <div class="prose" style="margin-top:14px">
-      <h3 style="margin:0 0 10px">More</h3>
-      <div class="repo-grid">
-        ${more.map(card).join("")}
-      </div>
-    </div>
+    ${section("Featured", featured)}
+    ${section("Software", software)}
+    ${section("Games", games)}
+    ${section("Web Development", webdev)}
+    ${section("All Other", allOther)}
   `;
 
   // --------------------------------------------------------------------------
