@@ -9,7 +9,7 @@
 </p>
 
 A fast, offline-capable personal portfolio built with **vanilla web technologies**.  
-No frameworks, no build step — designed for clarity, longevity, and control.
+No frameworks. No build step. Designed for clarity, longevity, and control.
 
 This site functions as both a portfolio and a long-form writing platform.
 
@@ -20,17 +20,16 @@ This site functions as both a portfolio and a long-form writing platform.
 - Centered hero with avatar, greeting, and social icons  
 - Tab-based navigation (About, Work, Projects, Posts, Music)  
 - Projects grid with detailed descriptions  
-- Posts index with:
-  - Sorting (newest, oldest, title)
+- Posts system powered by individual Markdown files:
+  - Sorted dynamically
   - Live filtering
   - Reading-time estimates  
-- Docs-style post view:
-  - Left sidebar tree grouped by year
-  - Markdown-rendered content
-  - Embedded images inside posts  
+  - Docs-style post layout with year-grouped sidebar  
+- Custom lightweight Markdown parser  
+- Embedded images inside posts  
 - Offline-first friendly (static assets only)  
 - Dark / light theme toggle  
-- RSS feed for posts (`rss.xml`)  
+- RSS feed (`rss.xml`)  
 
 ---
 
@@ -39,20 +38,22 @@ This site functions as both a portfolio and a long-form writing platform.
 - HTML5  
 - CSS (custom properties, responsive layout)  
 - Vanilla JavaScript  
-- Custom lightweight Markdown parser  
-- Static JSON content (no backend)  
+- Custom Markdown renderer  
+- File-based content system (`.md` posts)  
+
+No backend. No framework. No build tooling.
 
 ---
 
 ## Local Development
 
-Run a local server (required for fetch and routing):
+Run a local server (required for `fetch` and routing):
 
 ```bash
 python -m http.server 5173
 ```
 
-Then open:
+Open:
 
 ```
 http://localhost:5173
@@ -74,58 +75,61 @@ http://localhost:5173
 ├── rss.xml
 │
 ├── css/
-│   └── base.css
+│   ├── base.css
+│   └── pages/
+│       ├── music.css
+│       ├── post.css
+│       ├── posts.css
+│       └── projects.css
 │
 ├── js/
 │   ├── ui.js
 │   ├── data.js
-|   ├── icons.js
-|   ├── layout.js
+│   ├── icons.js
+│   ├── layout.js
 │   ├── markdown.js
 │   ├── config.js
 │   └── pages/
 │       ├── posts.js
 │       ├── post.js
 │       ├── projects.js
-|       ├── work.js
-|       ├── experience.js
+│       ├── work.js
+│       ├── experience.js
 │       ├── about.js
 │       └── music.js
 │
 ├── content/
-│   └── posts.json
+│   └── posts/
+│       ├── post_1.md
+│       ├── post_2.md
+│       └── ...
 │
 └── assets/
     ├── favicon_io/
     ├── posts/
     └── projects/
-    
 ```
 
 ---
 
-## Content Management
+## Content System
 
 ### Posts
 
 All writing lives in:
 
 ```
-content/posts.json
+content/posts/*.md
 ```
 
-Each post supports:
-- Title, slug, date, tags
-- Summary
-- Full Markdown body
-- Embedded images via Markdown links
+Each post includes metadata (title, slug, date, tags) and full Markdown content.
 
-Example:
+This file-based approach allows:
 
-```md
-[Post Image](/assets/posts/example.jpg)
-*Figure 1. Caption text.*
-```
+- Clean Git diffs  
+- Better scalability  
+- Easier long-form writing  
+- No centralized JSON bottleneck  
 
 ---
 
@@ -138,31 +142,31 @@ js/config.js
 ```
 
 Includes:
-- Name and tagline
-- Social links
-- “Now Playing” music metadata
-- Theme defaults
+
+- Identity and tagline  
+- Social links  
+- Music integration  
+- Theme defaults  
 
 ---
 
 ## Hosting
 
-This site is designed to be hosted as **static files**.
+Designed for static hosting:
 
-Works well on:
-- Namecheap shared hosting
-- GitHub Pages
-- Netlify
-- Cloudflare Pages
+- GitHub Pages  
+- Netlify  
+- Cloudflare Pages  
+- Shared hosting  
 
-No server-side code required.
+No server-side runtime required.
 
 ---
 
 ## Philosophy
 
 - Predictable UI over clever abstractions  
-- Offline-first by default  
+- Long-term maintainability over trend adoption  
 - Systems thinking applied to frontend architecture  
 - Calm, readable software that ages well  
 
@@ -170,5 +174,5 @@ No server-side code required.
 
 ## License
 
-Personal portfolio.  
-Reuse structure with attribution if referenced.
+Personal portfolio project.  
+Structure may be reused with attribution.
