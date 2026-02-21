@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const highlights = [
     { label: "Primary stack", value: "HTML • CSS • JavaScript • Electron" },
     { label: "Focus", value: "System-style UIs • Offline-first • UI architecture" },
-    { label: "Recent work", value: "Desktop4Kids OS • Genesis Script v2" },
+    { label: "Recent work", value: "Desktop4Kids OS • Dark Portfolio • Nightlamp Bible" },
     { label: "Education", value: "Business Admin (Entrepreneurship) • Upper Iowa University" },
   ];
 

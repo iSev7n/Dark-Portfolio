@@ -177,7 +177,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function section(title, items) {
     return `
       <div class="prose" style="margin-top:14px">
-        <h3 style="margin:0 0 10px">${UI.esc(title)}</h3>
+        <h3 class="projects-section-title">${UI.esc(title)}</h3>
         <div class="repo-grid">
           ${items.map(card).join("")}
         </div>
@@ -189,9 +189,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Render Page
   // --------------------------------------------------------------------------
   app.innerHTML = `
-    <div class="prose" style="margin-top:18px">
-      <h2 style="margin:0 0 8px">Projects</h2>
-      <p class="muted" style="margin:0">
+    <div class="prose projects-intro">
+      <h2 class="projects-title">Projects</h2>
+      <p class="muted projects-subtitle">
         Organized by category so it stays clean and easy to build on.
       </p>
     </div>
@@ -202,69 +202,4 @@ document.addEventListener("DOMContentLoaded", () => {
     ${section("Web Development", webdev)}
     ${section("All Other", allOther)}
   `;
-
-  // --------------------------------------------------------------------------
-  // Page Styles (Projects-only)
-  // --------------------------------------------------------------------------
-  const style = document.createElement("style");
-  style.textContent = `
-    .repo-grid{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:14px;
-    }
-    @media (max-width: 1100px){ .repo-grid{ grid-template-columns:repeat(2,1fr); } }
-    @media (max-width: 700px){ .repo-grid{ grid-template-columns:1fr; } }
-
-    .proj-card{
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-    }
-    .proj-card:hover{
-      transform: translateY(-2px);
-      border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
-      background: color-mix(in srgb, var(--panel2) 85%, var(--accent) 6%);
-    }
-
-    .proj-thumb{
-      margin-top:10px;
-      border:1px solid var(--border);
-      border-radius:8px;
-      overflow:hidden;
-      background: var(--panel);
-      box-shadow: 0 10px 24px rgba(0,0,0,.18);
-    }
-    .proj-thumb img{
-      width:100%;
-      height:140px;
-      object-fit:cover;
-      object-position:center;
-      display:block;
-    }
-
-    .proj-thumb--placeholder{
-      height:140px;
-      background:
-        radial-gradient(circle at 30% 25%, rgba(99,163,255,.25), transparent 55%),
-        radial-gradient(circle at 70% 70%, rgba(176,132,255,.22), transparent 55%),
-        color-mix(in srgb, var(--panel2) 80%, #000);
-    }
-
-    .btnlink{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:7px 10px;
-      border:1px solid var(--border);
-      background: color-mix(in srgb, var(--panel) 70%, transparent);
-      color: var(--text);
-      border-radius:6px;
-      font-weight:700;
-      font-size:12px;
-    }
-    .btnlink:hover{
-      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
-      background: color-mix(in srgb, var(--accent) 10%, var(--panel2));
-    }
-  `;
-  document.head.appendChild(style);
 });

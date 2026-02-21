@@ -1,0 +1,242 @@
+/* ==========================================================================
+   css/pages/posts.css
+   Purpose: posts index page only (posts.html)
+   - Tag bar + tag chips
+   - Posts table (desktop) + “cards” (mobile)
+   - Thumbnails on the posts list
+   ========================================================================== */
+
+/* =========================
+   TAG BAR
+========================= */
+
+.tagbar {
+  margin: 10px 0 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tag-list {
+  display: none;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.tagbar.open .tag-list {
+  display: flex;
+}
+
+.tagchip {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--panel2) 92%, transparent);
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: 800;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color .12s ease, background .12s ease, transform .12s ease, color .12s ease;
+}
+
+.tagchip:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: color-mix(in srgb, var(--panel2) 80%, var(--accent) 8%);
+  transform: translateY(-1px);
+}
+
+.tagchip.active {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+  background: color-mix(in srgb, var(--accent) 14%, var(--panel2));
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+}
+
+.tagchip:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 65%, transparent);
+  outline-offset: 2px;
+}
+
+/* mobile collapse behavior (tags) */
+@media (max-width: 700px) {
+  .tagbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tag-toggle {
+    background: color-mix(in srgb, var(--panel) 80%, transparent);
+    color: var(--text);
+    border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
+  }
+}
+
+
+/* =========================
+   POSTS TABLE (DESKTOP)
+   Stable card layout (thumb always above title)
+========================= */
+
+.posts-table{
+  table-layout:fixed;
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0 12px;
+}
+
+.posts-table .post-row{
+  background: color-mix(in srgb, var(--panel2) 88%, transparent);
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  transition: transform .15s ease, border-color .15s ease, background .15s ease;
+}
+
+.posts-table .post-row:hover{
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  background: color-mix(in srgb, var(--panel2) 85%, var(--accent) 6%);
+}
+
+.posts-table .post-row > td{
+  padding:16px;
+  vertical-align:top;
+}
+
+.posts-table .datecol{
+  width: 140px;
+  white-space: nowrap;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* your row layout */
+.post-title{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+}
+
+.post-title .emoji{
+  line-height:1;
+  margin-top:2px;
+}
+
+/* this is the actual content wrapper your JS creates */
+.post-main{
+  min-width:0;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* thumbnail always behaves the same */
+.post-thumb{
+  width:100%;
+  height: clamp(180px, 22vw, 260px);
+  border-radius:12px;
+  overflow:hidden;
+  background:#0d0d0d;
+  border:1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  flex: 0 0 auto;
+}
+
+.post-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.post-thumb{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  height: auto;
+  overflow: hidden;
+}
+.post-thumb img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-link{
+  text-decoration:none;
+  color:var(--text);
+  font-weight:800;
+  letter-spacing:.2px;
+}
+
+.post-link:hover{
+  text-decoration:underline;
+}
+
+.post-summary{
+  color:var(--muted);
+  line-height:1.5;
+}
+
+.post-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  color:var(--muted);
+  font-size:12px;
+}
+
+/* =========================
+   POSTS AS CARDS (MOBILE)
+========================= */
+
+@media (max-width: 700px) {
+  .posts-table thead {
+    display: none;
+  }
+
+  .posts-table .datecol {
+    display: none;
+  }
+
+  .posts-table .post-row {
+    display: block;
+    border-radius: 12px;
+    margin: 12px 0;
+    overflow: hidden;
+  }
+
+  .posts-table .post-row > td {
+    display: block;
+    padding: 12px;
+  }
+
+  .posts-table .post-row .post-main::before {
+    content: attr(data-date);
+    display: block;
+    color: var(--muted);
+    font-size: 12px;
+    margin-bottom: 6px;
+  }
+
+  .post-title {
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .post-link {
+    display: block;
+    font-size: 15px;
+    line-height: 1.25;
+  }
+
+  .post-thumb {
+    width: 100%;
+    height: 180px;
+    border-radius: 12px;
+    margin-top: 10px;
+  }
+}

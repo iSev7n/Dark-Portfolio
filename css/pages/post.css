@@ -1,0 +1,98 @@
+/* ==========================================================================
+   css/pages/post.css
+   Purpose: single post page only (post.html)
+   - Typography, cover image, tags
+   - Fix mobile horizontal scroll caused by cover/hero image
+   ========================================================================== */
+
+/* Prevent any horizontal scroll */
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.post-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 1.25rem 1rem;
+  box-sizing: border-box;
+}
+
+.post-header {
+  margin-bottom: 1rem;
+}
+
+.post-title {
+  line-height: 1.1;
+}
+
+.post-meta {
+  margin-top: .5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* tags/chips shown on the post page */
+.post-tags {
+  margin-top: .75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* COVER / HERO IMAGE (the usual culprit) */
+.post-cover {
+  margin: 1rem 0 1.25rem;
+  border-radius: 14px;
+  overflow: hidden;          /* clips glow/shadow so it doesn't widen layout */
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.post-cover,
+.post-cover img {
+  max-width: 100%;
+  width: 100%;
+}
+
+.post-cover img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Main content */
+.post-body {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.post-body img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Code blocks: scroll inside themselves, not the page */
+.post-body pre {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.post-body code {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Extra safety: if any element uses 100vw, force it back */
+@media (max-width: 700px) {
+  .post-cover img {
+    width: 100% !important;
+  }
+}

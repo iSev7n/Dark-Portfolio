@@ -58,11 +58,12 @@ window.SITE_CONFIG = {
   },
 
   // ----------------------------------------------------
-  // Music page embed configuration
+  // Music page embed configuration (Spotify)
   // ----------------------------------------------------
   music: {
-    ytListId: "PLY2pabb5IMzATuTdV4NeEDaZY5rpEYngu",
-    open: "https://music.youtube.com/playlist?list=PLY2pabb5IMzATuTdV4NeEDaZY5rpEYngu",
+    spotifyPlaylistId: "558HhIScKT7W0eB1B8s3Ob",
+    spotifyPlaylistUrl: "https://open.spotify.com/playlist/558HhIScKT7W0eB1B8s3Ob",
+    open: "https://open.spotify.com/playlist/558HhIScKT7W0eB1B8s3Ob",
   },
 
   // ----------------------------------------------------

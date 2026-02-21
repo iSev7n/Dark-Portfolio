@@ -63,7 +63,6 @@ html[data-theme="light"] .table{
    2) BASE / RESETS
    ========================================================================== */
 *{ box-sizing:border-box; }
-html,body{ height:100%; }
 
 body{
   margin:0;
@@ -95,7 +94,7 @@ a:hover{ filter:brightness(1.15); }
 }
 
 .topbar-inner{
-  width:min(1250px, 94vw);
+  width: min(1250px, calc(100% - 24px));
   margin:0 auto;
   padding:12px 0;
   display:flex;
@@ -159,7 +158,7 @@ html[data-theme="light"] .topbtn:hover{
    4) LAYOUT WRAPPERS
    ========================================================================== */
 .container{
-  width:min(1250px, 94vw);
+  width: min(1250px, calc(100% - 24px));
   margin:0 auto;
   padding:22px 0 70px;
 }
@@ -386,6 +385,11 @@ select, input{
 
 input{ min-width:220px; }
 
+/* Make native form controls match dark/light theme (prevents white selects on mobile) */
+html[data-theme="dark"]{ color-scheme: dark; }
+html[data-theme="light"]{ color-scheme: light; }
+select option{ background: var(--panel2); color: var(--text); }
+
 
 /* ==========================================================================
    8) TABLES
@@ -460,6 +464,39 @@ html[data-theme="light"] .table tr:hover td{
   top:68px;
   max-height: calc(100vh - 95px);
   overflow:auto;
+}
+
+/* Collapsible sidebar behavior (works with <details>) */
+.side-collapsible{
+  border:0;
+}
+
+.side-summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 8px 10px;
+  border-bottom:1px solid var(--border);
+  color:var(--muted);
+}
+
+.side-summary::-webkit-details-marker{ display:none; }
+
+.side-summary-right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+.side-collapsible .chev{
+  display:inline-block;
+  transition: transform .15s ease;
+}
+
+.side-collapsible[open] .chev{
+  transform: rotate(180deg);
 }
 
 .side-title{
@@ -674,6 +711,25 @@ pre{
   margin-right:6px;
 }
 
+@media (max-width:980px){
+  /* On mobile, keep the sidebar compact */
+  .sidebar{
+    padding:0;
+  }
+
+  /* Limit list height when opened so it does not take over the page */
+  .side-collapsible[open] .tree{
+    max-height: 45vh;
+    overflow:auto;
+    padding:8px;
+  }
+
+  /* When collapsed, no extra padding */
+  .side-collapsible:not([open]) .tree{
+    padding:0;
+  }
+}
+
 
 /* ==========================================================================
    14) BUTTONS / LINKS
@@ -802,3 +858,31 @@ img, svg, iframe{
   flex-shrink: 0;
 }
 
+/* =========================
+   REAL MOBILE FIX FOR DOCS LAYOUT
+========================= */
+
+@media (max-width: 980px){
+
+  /* ensure grid becomes one column */
+  .docs{
+    grid-template-columns: 1fr;
+  }
+
+  /* allow grid children to shrink */
+  .docs > *{
+    min-width: 0;
+  }
+
+  /* prevent sidebar padding/border from widening layout */
+  .sidebar{
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* prevent content box from pushing width */
+  .content{
+    width: 100%;
+    max-width: 100%;
+  }
+}
